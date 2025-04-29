@@ -18,7 +18,7 @@ function create_instance() {
 }
 
 function update_ip() {
-    terraform output -raw ec2_public_ip > ../ansible/hosts
+    terraform output -raw ubuntu_public_ip > ../ansible/hosts
 }
 
 function ansible() {
