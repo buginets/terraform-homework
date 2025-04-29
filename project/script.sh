@@ -30,6 +30,6 @@ function ansible() {
 prepare_bastion
 create_instance
 update_ip
-echo "Waiting 20 seconds"
-sleep 20
-ansible
+# echo "Waiting 20 seconds"
+# sleep 20
+# ansible

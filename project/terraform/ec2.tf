@@ -27,6 +27,25 @@ resource "aws_instance" "project" {
 
 }
 
+resource "null_resource" "ansible_provision" {
+  depends_on = [aws_instance.project]
+
+  provisioner "local-exec" {
+  command = <<EOT
+    echo "Waiting for SSH to be available..."
+    while ! nc -z ${aws_instance.project.public_ip} 22; do sleep 20; done
+
+    ANSIBLE_HOST_KEY_CHECKING=False \
+    ansible-playbook \
+      -i "${aws_instance.project.public_ip}," \
+      -u ubuntu \
+      --private-key ~/.ssh/id_rsa \
+      ../ansible/main.yml
+  EOT
+}
+
+}
+
 output ubuntu_public_ip {
   
   value = aws_instance.project.public_ip
