@@ -1,14 +1,4 @@
-host: all
-become: yes
-tasks:
-  - name: Install plugin
-    community.general.jenkins_plugin:
-      name: build-pipeline-plugin
-  - name: Make sure the plugin is always up-to-date
-    community.general.jenkins_plugin:
-      name: token-macro
-      state: latest  
-  - name: Enable the plugin
-    community.general.jenkins_plugin:
-      name: token-macro
-      state: enabled      
+- hosts: all
+  become: yes
+  roles:
+    - jenkins

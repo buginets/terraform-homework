@@ -25,3 +25,11 @@ function ansible() {
     cd ../ansible
     ansible-playbook main.yml
 }
+
+
+prepare_bastion
+create_instance
+update_ip
+echo "Waiting 20 seconds"
+sleep 20
+ansible
